@@ -13,6 +13,9 @@ Lost in the Lens is a text-based Python adventure game where the player explores
 - Inventory management
 - Game navigation and program logic
 
+- <img width="2231" height="2268" alt="image" src="https://github.com/user-attachments/assets/6b522adb-aaa0-40d5-90aa-64546b1e1e52" />
+
+
 ## How to Play- 
 
 Explore the wilderness by entering commands to move between locations, collect photography gear, check your inventory, and complete the adventure.
