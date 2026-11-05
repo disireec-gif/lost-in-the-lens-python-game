@@ -51,63 +51,30 @@ REQUIRED_GEAR = {
     "tripod",
     "memory card",
     "weather cover",
-    """Lost in the Lens - a text-based wilderness photography adventure."""
-
-
-LOCATIONS = {
-    "Trailhead": {
-        "description": "A rain-soaked trail marker points deeper into Cascade Peak National Park.",
-        "exits": {"north": "Fern Hollow", "east": "River Crossing"},
-        "item": None,
-    },
-    "Fern Hollow": {
-        "description": "Ferns crowd a quiet hollow. Something metallic glints beneath a log.",
-        "exits": {"south": "Trailhead", "east": "Cedar Grove"},
-        "item": "tripod",
-    },
-    "River Crossing": {
-        "description": "A slick footbridge spans a rushing, glacial river.",
-        "exits": {"west": "Trailhead", "north": "Cedar Grove", "east": "Granite Pass"},
-        "item": "camera body",
-    },
-    "Cedar Grove": {
-        "description": "Towering cedars shelter a small clearing from the storm.",
-        "exits": {"west": "Fern Hollow", "south": "River Crossing", "north": "Wildflower Meadow"},
-        "item": "wide-angle lens",
-    },
-    "Granite Pass": {
-        "description": "Wind whistles through a narrow pass between granite walls.",
-        "exits": {"west": "River Crossing", "north": "Wildflower Meadow", "east": "Eagle Ridge"},
-        "item": "telephoto lens",
-    },
-    "Wildflower Meadow": {
-        "description": "Storm clouds part over a meadow bright with alpine flowers.",
-        "exits": {"south": "Cedar Grove", "east": "Eagle Ridge"},
-        "item": "memory card",
-    },
-    "Eagle Ridge": {
-        "description": "The ridge gives you a dramatic view of the summit above.",
-        "exits": {"west": "Granite Pass", "east": "Summit Overlook"},
-        "item": "weather cover",
-    },
-    "Summit Overlook": {
-        "description": "Rogue Ranger Rex waits beside the overlook, arms folded.",
-        "exits": {"west": "Eagle Ridge"},
-        "item": None,
-    },
 }
 
-REQUIRED_GEAR = {
-    "camera body",
-    "wide-angle lens",
-    "telephoto lens",
-    "tripod",
-    "memory card",
-    "weather cover",
-}
+def can_move(location, direction):
+    """Return True when the player can move in the chosen direction."""
+    return direction in LOCATIONS[location]["exits"]
 
 
-def show_location(location):
+def get_next_location(location, direction):
+    """Return the destination for a valid movement direction."""
+    return LOCATIONS[location]["exits"].get(direction)
+
+
+def has_all_required_gear(inventory):
+    """Return True when all required photography gear is collected."""
+    return set(inventory) == REQUIRED_GEAR
+
+
+def get_missing_gear(inventory):
+    """Return the required gear that has not been collected."""
+    return REQUIRED_GEAR - set(inventory)
+
+
+
+def  show_location(location):
     """Print the current location, available exits, and any gear present."""
     data = LOCATIONS[location]
     print(f"\n== {location} ==")
